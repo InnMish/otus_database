@@ -1,17 +1,21 @@
 --1
 --узнаем, товары каких поставщиков есть на складе
-select distinct producer_name from producer p inner join product pr
+select distinct producer_name from producer p
+inner join product pr
 on p.producer_id = pr.producer_id ;
 
 --2
 --находим все товары в категории Электроника
-select product_name from product p left join product_to_category ptc
+select product_name from product p
+left join product_to_category ptc
 on p.product_id = ptc.product_id
-left join category c on c.category_id = ptc.category_id where c.category_name = 'Electronics';
+left join category c on c.category_id = ptc.category_id
+where c.category_name = 'Electronics';
 
 --3.1
 --выбираем всю электронику с подходящей ценой. Частый фильтр в интернет-магазинах
-select product_name, quantity from product p left join product_to_category ptc
+select product_name, quantity from product p
+left join product_to_category ptc
 on p.product_id = ptc.product_id
 left join category c on c.category_id = ptc.category_id
 where c.category_name = 'Electronics' and p.price < 100.00;
@@ -27,7 +31,8 @@ select provider_name from provider p where details is null;
 
 --3.4
 -- выбираем товары, которые не относятся к какой-либо категории. Дальше можно или заполнить, или отнести их к категории Разное
-select product_name, quantity from product p left join product_to_category ptc
+select product_name, quantity from product p
+left join product_to_category ptc
 on p.product_id = ptc.product_id
 left join category c on c.category_id = ptc.category_id
 where c.category_name is null;
